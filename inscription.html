@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var formulaire = document.querySelector("form");
+
+            formulaire.addEventListener("submit", function (event) {
+                var email = formulaire.querySelector("#email").value;
+                var motDePasse = formulaire.querySelector("#mot_pass").value;
+
+                if (!validerEmail(email)) {
+                    alert("Veuillez entrer une adresse e-mail valide (@gmail.com uniquement).");
+                    event.preventDefault();
+                    return false;
+                }
+
+                if (!validerMotDePasse(motDePasse)) {
+                    alert("Le mot de passe doit contenir au moins 6 caractères, y compris des chiffres.");
+                    event.preventDefault();
+                    return false;
+                }
+            });
+
+            function validerEmail(email) {
+                var regexEmail = /\b[A-Za-z0-9._%+-]+@gmail\.com\b/;
+                return regexEmail.test(email);
+            }
+
+            function validerMotDePasse(motDePasse) {
+                var regexMotDePasse = /^(?=.*\d)(?=.*[a-zA-Z]).{6,}$/;
+                return regexMotDePasse.test(motDePasse);
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1 class="text-primary text-center">Bienvenue dans mon site web</h1>
+            <form action="ajout.php" method="post">
+                <div class="mb-3">
+                    <label for="nom" class="form-label">Nom :</label>
+                    <input type="text" class="form-control" id="nom" name="nom" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email :</label>
+                    <input type="text" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="mot_pass" class="form-label">Mot de passe :</label>
+                    <input type="password" class="form-control" id="mot_pass" name="mot_pass" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
+            </form>
+            <h1 class="text-primary text-center">Déjà inscrit ?</h1>
+            <a href="connexion.html" class="btn btn-primary d-block">Connectez-vous ici</a>
+        </div>
+    </div>
+</body>
+</html>
+
